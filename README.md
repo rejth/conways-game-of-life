@@ -7,6 +7,8 @@ This repo compares two browser GPU implementations of Conway's Game of Life:
 
 The root app provides two tabs so the simulations can be viewed from the same page and under the same browser/runtime conditions.
 
+<img width="923" height="927" alt="image" src="https://github.com/user-attachments/assets/ddbcd1ee-c71a-4c8b-a84f-822e16085734" />
+
 ## Project Idea
 
 Conway's Game of Life is a small ruleset with a large amount of parallel work: every cell reads its neighbors, applies the same rule, and writes the next state. That makes it a useful learning target for WebGPU compute shaders because the simulation can live almost entirely on the GPU.
