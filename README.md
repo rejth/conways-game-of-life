@@ -7,7 +7,7 @@ This repo compares two browser GPU implementations of Conway's Game of Life:
 
 The root app provides two tabs so the simulations can be viewed from the same page and under the same browser/runtime conditions.
 
-<img width="708" height="931" alt="image" src="https://github.com/user-attachments/assets/7666a590-7144-4b32-9ba4-ef691d3cc406" />
+<img width="859" height="925" alt="image" src="https://github.com/user-attachments/assets/5f3745be-3996-4eed-9ed5-f458c043a32e" />
 
 ## Project Idea
 
