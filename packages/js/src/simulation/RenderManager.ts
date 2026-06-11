@@ -16,11 +16,7 @@ function resizeCanvasToDisplaySize(canvas: HTMLCanvasElement): boolean {
   return needsResize;
 }
 
-function writeBufferData(
-  device: GPUDevice,
-  buffer: GPUBuffer,
-  data: Float32Array | Uint32Array,
-): void {
+function writeBufferData(device: GPUDevice, buffer: GPUBuffer, data: Float32Array | Uint32Array): void {
   device.queue.writeBuffer(buffer, 0, data as unknown as GPUAllowSharedBufferSource);
 }
 
@@ -61,9 +57,7 @@ export class RenderManager {
     this.canvas = canvas;
     await this.init(canvas);
 
-    this.vertices = new Float32Array([
-      -0.8, -0.8, 0.8, -0.8, 0.8, 0.8, -0.8, -0.8, 0.8, 0.8, -0.8, 0.8,
-    ]);
+    this.vertices = new Float32Array([-0.8, -0.8, 0.8, -0.8, 0.8, 0.8, -0.8, -0.8, 0.8, 0.8, -0.8, 0.8]);
 
     const uniforms = new Float32Array([this.gridSize, this.gridSize]);
 

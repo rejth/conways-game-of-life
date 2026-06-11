@@ -3,22 +3,25 @@ import { mountJsSimulation } from "@conway/js";
 import { mountRustSimulation } from "@conway/rust";
 import { onUnmounted, ref, watch } from "vue";
 
-type Demo = "js" | "rust";
+enum Demo {
+  JS = "js",
+  RUST = "rust",
+}
 
 const demos: Array<{ id: Demo; label: string; caption: string }> = [
   {
-    id: "js",
+    id: Demo.JS,
     label: "TS WebGPU",
     caption: "Compute and render pipelines written directly against the browser WebGPU API.",
   },
   {
-    id: "rust",
+    id: Demo.RUST,
     label: "Rust wgpu WASM",
     caption: "The same simulation model compiled from Rust to WebAssembly and driven by wgpu.",
   },
 ];
 
-const activeDemo = ref<Demo>("js");
+const activeDemo = ref<Demo>(Demo.JS);
 const jsCanvasRef = ref<HTMLCanvasElement | null>(null);
 const rustCanvasRef = ref<HTMLCanvasElement | null>(null);
 const rustStarted = ref(false);
@@ -34,7 +37,7 @@ function unmountJsSimulation() {
 
 function mountJsDemo() {
   const canvas = jsCanvasRef.value;
-  if (activeDemo.value !== "js" || !canvas) {
+  if (activeDemo.value !== Demo.JS || !canvas) {
     return;
   }
 
@@ -52,7 +55,7 @@ function mountJsDemo() {
 watch(
   [activeDemo, jsCanvasRef],
   ([demo]) => {
-    if (demo === "js") {
+    if (demo === Demo.JS) {
       mountJsDemo();
       return;
     }
@@ -65,7 +68,7 @@ watch(
 watch(
   [activeDemo, rustCanvasRef],
   ([demo]) => {
-    if (demo !== "rust" || rustStarted.value || !rustCanvasRef.value) {
+    if (demo !== Demo.RUST || rustStarted.value || !rustCanvasRef.value) {
       return;
     }
 

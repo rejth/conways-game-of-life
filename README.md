@@ -18,12 +18,50 @@ The motivation is to compare the ergonomics and boundaries of two approaches:
 
 Both versions use the same broad architecture: initialize a random grid, store cell state in GPU buffers, update the grid with a compute shader, and render every cell through instanced drawing.
 
-## Requirements
+## Prerequisites
 
-- Node.js with pnpm
-- Rust
-- `wasm-pack`
-- A browser with WebGPU support
+### Install Rust
+
+Install Rust using [rustup](https://rustup.rs/) (the official installer):
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+After installation, restart your terminal or run:
+
+```bash
+source $HOME/.cargo/env
+```
+
+Verify installation:
+
+```bash
+rustc --version
+cargo --version
+```
+
+### Install wasm-pack
+
+This project uses [wasm-pack](https://github.com/wasm-bindgen/wasm-pack) to compile the Rust crate to WebAssembly and generate the JavaScript bindings in `pkg/`.
+
+Install with the official installer:
+
+```bash
+curl https://wasm-bindgen.github.io/wasm-pack/installer/init.sh -sSf | sh
+```
+
+Or with Cargo:
+
+```bash
+cargo install wasm-pack
+```
+
+Verify installation:
+
+```bash
+wasm-pack --version
+```
 
 ## Setup
 

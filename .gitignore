@@ -3,3 +3,4 @@ dist/
 packages/rust/pkg/
 packages/rust/target/
 .DS_Store
+.vercel

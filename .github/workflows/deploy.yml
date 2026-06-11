@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [master]
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+
+    # Deploys the dist artifact produced by CI to Vercel.
+    # Disable Vercel Git auto-deploy if you use this workflow.
+    #
+    # Required repository secrets:
+    #   VERCEL_TOKEN       - https://vercel.com/account/tokens
+    #   VERCEL_ORG_ID      - from .vercel/project.json after `vercel link`
+    #   VERCEL_PROJECT_ID  - from .vercel/project.json after `vercel link`
+
+    steps:
+      - name: Download production build
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+          path: dist/
+
+      - name: Deploy to Vercel
+        run: npx vercel deploy dist --prod --yes --token="${{ secrets.VERCEL_TOKEN }}"
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
