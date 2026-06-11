@@ -43,22 +43,25 @@ jobs:
           workspaces: packages/rust
 
       - name: Install wasm-pack
-        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+        run: curl https://wasm-bindgen.github.io/wasm-pack/installer/init.sh -sSf | sh
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Build WASM
+        run: pnpm --filter @conway/rust wasm:build:release
 
       - name: Lint
         run: pnpm lint
 
       - name: Typecheck
-        run: pnpm typecheck
+        run: tsc --noEmit
 
       - name: Test
         run: pnpm test
 
       - name: Build
-        run: pnpm build
+        run: pnpm run build:web
 
       - name: Upload production build
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'

@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter @conway/rust wasm:build && vite",
-    "build": "pnpm --filter @conway/rust wasm:build:release && tsc --noEmit && vite build",
+    "build": "pnpm --filter @conway/rust wasm:build:release && pnpm run build:web",
+    "build:web": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "pnpm --filter @conway/rust wasm:build && tsc --noEmit",
     "lint": "oxlint . && biome check .",
     "format": "biome check --write . && cargo fmt --manifest-path packages/rust/Cargo.toml",
     "test": "pnpm --filter @conway/rust test",
