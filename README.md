@@ -1,4 +1,4 @@
-# Conway's Game of Life: Rust + wgpu and TypeScript + WebGPU
+# Conway's Game of Life
 
 This repo compares two browser GPU implementations of Conway's Game of Life:
 
