@@ -1,0 +1,14 @@
+{
+  "name": "@conway/rust",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./web/index.ts"
+  },
+  "scripts": {
+    "wasm:build": "wasm-pack build --target web --out-dir pkg --out-name conway_rust",
+    "wasm:build:release": "wasm-pack build --target web --release --out-dir pkg --out-name conway_rust",
+    "test": "cargo test && wasm-pack test --node"
+  }
+}

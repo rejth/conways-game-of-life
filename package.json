@@ -1,0 +1,33 @@
+{
+  "name": "conways-game-of-life",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @conway/rust wasm:build && vite",
+    "build": "pnpm --filter @conway/rust wasm:build:release && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint . && biome check .",
+    "format": "biome check --write . && cargo fmt --manifest-path packages/rust/Cargo.toml",
+    "test": "pnpm --filter @conway/rust test",
+    "prepare": "lefthook install"
+  },
+  "dependencies": {
+    "@conway/js": "workspace:*",
+    "@conway/rust": "workspace:*",
+    "vue": "^3.5.22"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.5",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@webgpu/types": "^0.1.69",
+    "lefthook": "^1.13.6",
+    "oxlint": "^1.26.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.0.3",
+    "vite-plugin-glsl": "^1.3.0",
+    "vite-plugin-wasm": "^3.3.0"
+  },
+  "packageManager": "pnpm@10.25.0"
+}
